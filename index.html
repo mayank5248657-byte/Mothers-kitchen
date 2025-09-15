@@ -1,139 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mother's Kitchen - Bhilai</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fffaf0; color: #333; }
-        header { background: #e63946; color: white; padding: 20px; text-align: center; }
-        h1 { margin: 0; }
-        nav { background: #f4a261; padding: 10px; text-align: center; }
-        nav a { margin: 0 15px; text-decoration: none; color: white; font-weight: bold; }
-        section { padding: 20px; }
-        h2 { border-bottom: 2px solid #ccc; padding-bottom: 5px; color: #e63946; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin: 5px 0; }
-        .menu-item { display: flex; justify-content: space-between; padding: 8px; border-bottom: 1px solid #ddd; }
-        footer { background: #264653; color: white; text-align: center; padding: 20px; margin-top: 20px; }
-        .info { margin: 10px 0; }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mother's Kitchen Bhilai — Order Online</title>
+  <meta name="description" content="Mother's Kitchen Bhilai — Home Made With Love. Order COD & Online. Delivery Bhilai & Durg."/>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#fffaf0;color:#222}
+    header{background:#e63946;color:#fff;padding:18px 16px;text-align:center}
+    .container{max-width:900px;margin:18px auto;padding:12px;}
+    h1{margin:0;font-size:22px}
+    .grid{display:grid;grid-template-columns:1fr;gap:12px}
+    .card{background:#fff;padding:12px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.06)}
+    .menu-item{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #eee}
+    .small{color:#666;font-size:13px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:8px;border:none;background:#128a2b;color:#fff;text-decoration:none;cursor:pointer}
+    .btn-wh{background:#25D366}
+    label{display:block;margin-top:8px;font-weight:600}
+    input,type,textarea,select{width:100%}
+    input,textarea,select{padding:8px;border-radius:6px;border:1px solid #ddd;margin-top:6px}
+    footer{padding:14px;text-align:center;color:#666;font-size:13px;margin-top:14px}
+    .row{display:flex;gap:8px}
+    @media(min-width:700px){ .grid{grid-template-columns:2fr 1fr} }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>Mother's Kitchen Bhilai</h1>
+    <div class="small">Home Made With Love — Delivery: Bhilai & Durg | 9 AM - 11 PM</div>
+  </header>
 
-<header>
-    <h1>Mother's Kitchen</h1>
-    <p>Delicious Home Style Food in Bhilai</p>
-</header>
+  <main class="container">
+    <div class="grid">
+      <!-- Left: Menu + Order form -->
+      <div>
+        <div class="card">
+          <h2>Menu (Quick View)</h2>
+          <div class="small">(Full menu available on request — type items in order box)</div>
+          <div class="menu-item"><span>Indore poha 500g</span><strong>₹150</strong></div>
+          <div class="menu-item"><span>Special dry fruits poha 500g</span><strong>₹180</strong></div>
+          <div class="menu-item"><span>Pav bhaji (4 pav)</span><strong>₹230</strong></div>
+          <div class="menu-item"><span>Veg Thali</span><strong>₹280</strong></div>
+          <div class="menu-item"><span>Chana masala 500g with rice 500g</span><strong>₹270</strong></div>
+          <div class="menu-item"><span>Green salad</span><strong>₹50</strong></div>
+          <div class="menu-item"><span>Gulab jamun (1 piece)</span><strong>₹50</strong></div>
+          <div style="margin-top:8px;" class="small">Packing: 10% | Delivery: ₹20 up to 6km then ₹10/km extra | Coupon: <strong>Motherskitchen</strong> (20% off on orders ≥ ₹150)</div>
+        </div>
 
-<nav>
-    <a href="#menu">Menu</a>
-    <a href="#offers">Offers</a>
-    <a href="#info">Info</a>
-</nav>
+        <div class="card" style="margin-top:12px">
+          <h2>Place Your Order</h2>
+          <p class="small">Fill below and press <strong>Place Order</strong>. You will get a confirmation email. For immediate help use WhatsApp button on the right.</p>
 
-<section id="menu">
-    <h2>Menu</h2>
-    <h3>All Day Indian Bites</h3>
-    <div class="menu-item"><span>Indore poha 500g</span><span>₹150</span></div>
-    <div class="menu-item"><span>Special dry fruits poha 500g</span><span>₹180</span></div>
-    <div class="menu-item"><span>Bread butter toast 4 slices</span><span>₹130</span></div>
-    <div class="menu-item"><span>Aloo pyaaz sandwich</span><span>₹140</span></div>
-    <div class="menu-item"><span>Chilli Garlic Maggi 500g</span><span>₹140</span></div>
-    <div class="menu-item"><span>Chilli Garlic butter maggi 500g</span><span>₹160</span></div>
-    <div class="menu-item"><span>Masala Maggi 500 g</span><span>₹125</span></div>
-    <div class="menu-item"><span>Veg upma 500 g</span><span>₹200</span></div>
-    <div class="menu-item"><span>Dahi Vada (1 piece)</span><span>₹90</span></div>
-    <div class="menu-item"><span>Dahi Vada (2 piece)</span><span>₹180</span></div>
-    <div class="menu-item"><span>Veg Dahi garden sandwich</span><span>₹150</span></div>
-    <div class="menu-item"><span>Veg Dahi grilled sandwich</span><span>₹160</span></div>
-    <div class="menu-item"><span>Veg mayonnaise sandwich</span><span>₹160</span></div>
-    <div class="menu-item"><span>Veg paneer sandwich</span><span>₹170</span></div>
-    <div class="menu-item"><span>Cholle Bhature (3 Bhature)</span><span>₹200</span></div>
-    <div class="menu-item"><span>Pav bhaji (4 pav)</span><span>₹230</span></div>
+          <!-- Form uses formsubmit.co to send email to your business email -->
+          <form action="https://formsubmit.co/motherskitchen032008@gmail.com" method="POST">
+            <!-- OPTIONAL: Set subject line for email -->
+            <input type="hidden" name="_subject" value="New Order from Website - Mother's Kitchen Bhilai">
+            <!-- OPTIONAL: Redirect back to thank you page (we'll use the same page with anchor) -->
+            <input type="hidden" name="_next" value="https://mayank5248657-byte.github.io/Mothers-kitchen/">
+            <!-- Disable captcha (not recommended for spam protection) - keep default -->
+            <!-- Customer info -->
+            <label for="name">Full name</label>
+            <input id="name" name="Customer Name" required placeholder="Your name">
 
-    <h3>Thali</h3>
-    <div class="menu-item"><span>Veg Thali</span><span>₹280</span></div>
-    <div class="menu-item"><span>Regular Thali</span><span>₹170</span></div>
-    <div class="menu-item"><span>Special Thali</span><span>₹320</span></div>
+            <label for="phone">Phone</label>
+            <input id="phone" name="Phone" required placeholder="10 digit mobile number">
 
-    <h3>Meals</h3>
-    <div class="menu-item"><span>Chana masala 500g with rice 500g</span><span>₹270</span></div>
-    <div class="menu-item"><span>Gatte ki sabzi 500g with rice 500g</span><span>₹270</span></div>
-    <div class="menu-item"><span>Rajma masala 500g with rice 500g</span><span>₹270</span></div>
-    <div class="menu-item"><span>Baigan ka bharta 250g with 5 poori</span><span>₹200</span></div>
-    <div class="menu-item"><span>Chole masala 350g with 6 poori</span><span>₹240</span></div>
-    <div class="menu-item"><span>Cholle masala 500g with rice 500g</span><span>₹270</span></div>
+            <label for="address">Delivery address</label>
+            <textarea id="address" name="Address" rows="2" required placeholder="House no, street, area, city"></textarea>
 
-    <h3>Salad</h3>
-    <div class="menu-item"><span>Green salad</span><span>₹50</span></div>
+            <label for="order">Order (write items and quantity)</label>
+            <textarea id="order" name="Order Details" rows="4" required placeholder="Example: 1 x Veg Thali, 2 x Indore poha 500g"></textarea>
 
-    <h3>Main Course</h3>
-    <div class="menu-item"><span>Baigan ka bharta 250 g</span><span>₹160</span></div>
-    <div class="menu-item"><span>Aloo matar</span><span>₹200</span></div>
-    <div class="menu-item"><span>Mixed Veg</span><span>₹235</span></div>
-    <div class="menu-item"><span>Matar paneer 350g</span><span>₹250</span></div>
-    <div class="menu-item"><span>Chana masala 500g</span><span>₹200</span></div>
-    <div class="menu-item"><span>Cholle masala 500g</span><span>₹200</span></div>
-    <div class="menu-item"><span>Palak paneer 350g</span><span>₹260</span></div>
-    <div class="menu-item"><span>Dal fry</span><span>₹120</span></div>
-    <div class="menu-item"><span>Dal tadka</span><span>₹150</span></div>
+            <label for="distance">Distance from our shop (approx km)</label>
+            <input id="distance" name="Distance (km)" placeholder="e.g., 3">
 
-    <h3>Breads</h3>
-    <div class="menu-item"><span>Aloo pyaaz paratha (1 piece) with raita</span><span>₹100</span></div>
-    <div class="menu-item"><span>Aloo pyaaz paratha (2 piece) with raita</span><span>₹195</span></div>
-    <div class="menu-item"><span>Aloo paratha (1 piece) with raita</span><span>₹95</span></div>
-    <div class="menu-item"><span>Aloo paratha (2 piece) with raita</span><span>₹190</span></div>
-    <div class="menu-item"><span>Plain paratha (1 piece)</span><span>₹40</span></div>
-    <div class="menu-item"><span>Plain poori (1 piece)</span><span>₹20</span></div>
-    <div class="menu-item"><span>Tawa roti (1 piece)</span><span>₹20</span></div>
-    <div class="menu-item"><span>Phulka (1 piece)</span><span>₹20</span></div>
-    <div class="menu-item"><span>Tawa roti with butter (1 piece)</span><span>₹30</span></div>
-    <div class="menu-item"><span>Desi ghee plain paratha (1 piece)</span><span>₹70</span></div>
-    <div class="menu-item"><span>Namkeen Puran Poli (1 piece)</span><span>₹100</span></div>
-    <div class="menu-item"><span>Paneer paratha (1 piece)</span><span>₹130</span></div>
-    <div class="menu-item"><span>Paneer paratha (2 piece)</span><span>₹250</span></div>
+            <label for="payment">Payment method</label>
+            <select id="payment" name="Payment method" required>
+              <option value="COD">Cash on Delivery (COD)</option>
+              <option value="UPI">Pay via UPI (send txn id)</option>
+              <option value="Online">Online payment (provide txn id)</option>
+            </select>
 
-    <h3>Rice</h3>
-    <div class="menu-item"><span>Plain rice 500g</span><span>₹110</span></div>
-    <div class="menu-item"><span>Jeera Rice 500g</span><span>₹120</span></div>
-    <div class="menu-item"><span>Plain dal Khichdi 500g</span><span>₹210</span></div>
-    <div class="menu-item"><span>Veg dal Khichdi 500g</span><span>₹230</span></div>
+            <label for="txn">If you paid online / UPI — enter TXN ID or UPI screenshot link</label>
+            <input id="txn" name="Transaction ID or UPI details" placeholder="Optional — txn id or screenshot link">
 
-    <h3>Accompaniments</h3>
-    <div class="menu-item"><span>Boondi raita 250 ml</span><span>₹110</span></div>
-    <div class="menu-item"><span>Fried moong papad (1 piece)</span><span>₹30</span></div>
-    <div class="menu-item"><span>Roasted moong papad (1 piece)</span><span>₹25</span></div>
+            <label for="note">Any note for delivery (eg: landmark)</label>
+            <input id="note" name="Delivery note" placeholder="Payal studio ke pass...">
 
-    <h3>Desserts</h3>
-    <div class="menu-item"><span>Kesariya halwa</span><span>₹130</span></div>
-    <div class="menu-item"><span>Plain halwa</span><span>₹120</span></div>
-    <div class="menu-item"><span>Kesariya bhaat</span><span>₹150</span></div>
-    <div class="menu-item"><span>Chawal ki kheer</span><span>₹100</span></div>
-    <div class="menu-item"><span>Sabudana kheer</span><span>₹100</span></div>
-    <div class="menu-item"><span>Gulab jamun (1 piece)</span><span>₹50</span></div>
-    <div class="menu-item"><span>Rasgulla (1 piece)</span><span>₹50</span></div>
-    <div class="menu-item"><span>Shrikhand 100g</span><span>₹50</span></div>
-</section>
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <button class="btn" type="submit">Place Order</button>
+              <button class="btn" type="reset" style="background:#ccc;color:#000">Clear</button>
+            </div>
+          </form>
 
-<section id="offers">
-    <h2>Offers</h2>
-    <p>🎉 Get 20% OFF on Orders above ₹150. Use Coupon Code: <b>Motherskitchen</b></p>
-</section>
+          <p class="small" style="margin-top:10px">Important: For online payments — customers can pay using UPI to <strong>bhawanasingh00841@ybl</strong> and paste the txn id above. Once you verify payment in your bank / UPI app, accept the order.</p>
+        </div>
+      </div>
 
-<section id="info">
-    <h2>Info</h2>
-    <div class="info"><b>Business Address:</b> 114/3A, Maitri Nagar Risali Bhilai (Landmark: Payal studio)</div>
-    <div class="info"><b>Delivery Timing:</b> 9 AM to 11 PM (Monday to Sunday)</div>
-    <div class="info"><b>Packing Charges:</b> 10% of total order value</div>
-    <div class="info"><b>Delivery Charges:</b> ₹20 for first 6 km, then ₹10 per extra km</div>
-    <div class="info"><b>UPI ID:</b> bhawanasingh00841@ybl</div>
-    <div class="info"><b>Bank Details:</b> Punjab National Bank, A/C No: 05362612000193, IFSC: PUNB0053610</div>
-</section>
+      <!-- Right: Contact, WhatsApp, Quick info -->
+      <aside>
+        <div class="card">
+          <h3>Contact & Quick Actions</h3>
+          <div class="small"><strong>Phone:</strong> 7470607096</div>
+          <div class="small"><strong>Email:</strong> motherskitchen032008@gmail.com</div>
+          <div class="small"><strong>Address:</strong> 114/3A, Maitri Nagar Risali Bhilai (Payal studio)</div>
+          <div style="margin-top:8px">
+            <!-- WhatsApp link: open chat with prefilled message -->
+            <a class="btn btn-wh" href="https://wa.me/917470607096?text=Hello%20Mother's%20Kitchen%20Bhilai%20-%20I%20want%20to%20place%20an%20order%20:%20%0A%0A" target="_blank">Order via WhatsApp</a>
+          </div>
+          <div style="margin-top:12px">
+            <h4 style="margin:6px 0">Payment (easy)</h4>
+            <div class="small"><strong>UPI ID:</strong> bhawanasingh00841@ybl</div>
+            <div class="small"><strong>Bank:</strong> Punjab National Bank</div>
+            <div class="small"><strong>A/C:</strong> 05362612000193</div>
+            <div class="small"><strong>IFSC:</strong> PUNB0053610</div>
+          </div>
+        </div>
 
-<footer>
-    <p>© 2025 Mother's Kitchen | Designed with ❤️ in Bhilai</p>
-</footer>
+        <div class="card" style="margin-top:12px">
+          <h4>How orders arrive</h4>
+          <div class="small">When customer submits this form, you will receive an email (to motherskitchen032008@gmail.com) with full order details. Check that email and call customer to confirm if needed.</div>
+        </div>
 
+        <div class="card" style="margin-top:12px">
+          <h4>Need payments online (Razorpay)?</h4>
+          <div class="small">This form accepts txn id for online payments. If you want full online checkout (cards/UPI/Wallets) integrated, I can set up Razorpay + backend — that requires Razorpay account and takes ~1–2 days.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Mother's Kitchen Bhilai — Packing 10% • Delivery ₹20 up to 6km then ₹10/km extra • Coupon: Motherskitchen
+  </footer>
 </body>
 </html>
