@@ -1,1 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mother's Kitchen Bhilai — Order Online</title>
+<link rel="icon" href="logo.svg" />
+<style>
+:root{--green:#128a2b;--muted:#666;--bg:#fff8f0;--card:#fff}
+*{box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:#111}
+.header{background:linear-gradient(90deg,#fff,#ffecec);padding:14px 18px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand h1{margin:0;font-size:20px;color:#c62828}
+.tag{color:var(--muted);font-size:13px}
+.container{max-width:1100px;margin:14px auto;padding:10px}
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+.card{background:var(--card);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.menu-item{padding:10px;border-radius:8px;background:#fff;display:flex;flex-direction:column;gap:8px}
+.row{display:flex;gap:8px;align-items:center}
+.btn{padding:8px 12px;border-radius:8px;border:none;background:var(--green);color:#fff;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--green);border:1px solid #e5e5e5}
+.small{color:var(--muted);font-size:13px}
+.cart-panel{position:fixed;right:18px;top:100px;width:360px;max-height:75vh;overflow:auto;padding:12px;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,0.08);background:var(--card)}
+.hidden{display:none}
+.form input,.form textarea,.form select{width:100%;padding:8px;border-radius:6px;border:1px solid #e5e5e5;margin-top:6px}
+.footer{margin-top:16px;text-align:center;color:var(--muted);padding:12px}
+.qty-control{display:flex;gap:8px;align-items:center}
+.badge{background:#f1f8f1;color:#128a2b;padding:4px 8px;border-radius:6px;font-weight:600}
+@media(min-width:900px){.grid{grid-template-columns:2fr 1fr} .cart-panel{position:fixed}}
+</style>
+</head>
+<body>
+<header class="header container" style="align-items:flex-start">
+  <div class="brand"><img src="logo.svg" alt="logo" style="width:64px;height:64px;margin-right:10px"><div><h1>Mother's Kitchen Bhilai</h1><div class="tag">Home Made With Love — Delivery: Bhilai & Durg | 9 AM - 11 PM</div></div></div>
+  <div class="small" style="text-align:right">
+    📞 7470607096<br>📧 motherskitchen032008@gmail.com<br><span class="badge">Packing 10% • Delivery ₹20 up to 6km then ₹10/km</span>
+  </div>
+</header>
 
+<main class="container grid">
+  <section>
+    <div class="card">
+      <h2>Menu</h2>
+      <div class="small">Choose items and set quantity. Coupon <strong>Motherskitchen</strong> gives 20% off on orders ≥ ₹150.</div>
+      <div id="menu" class="menu-grid" style="margin-top:10px"></div>
+    </div>
+  </section>
+
+  <aside>
+    <div class="card">
+      <h3>Your Cart</h3>
+      <div id="cart-items"></div>
+      <div style="margin-top:10px">
+        <div class="small">Items Total: ₹<span id="items-total">0</span></div>
+        <div class="small">Packing (10%): ₹<span id="packing">0</span></div>
+        <div class="small">Delivery: ₹<span id="delivery-charge">0</span></div>
+        <div class="small">Discount: -₹<span id="discount">0</span></div>
+        <div style="font-weight:700;margin-top:8px">Grand Total: ₹<span id="grand-total">0</span></div>
+      </div>
+
+      <div style="margin-top:12px">
+        <label>Customer location (auto)</label>
+        <div class="small">Click the button to allow location and auto-calc distance to shop.</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn" id="use-location">Use my location</button>
+          <button class="btn ghost" id="enter-manual">Enter distance</button>
+        </div>
+        <div id="manual-block" class="hidden" style="margin-top:8px">
+          <input id="manual-distance" placeholder="Enter distance in km (e.g., 3)" />
+          <button class="btn" id="apply-manual">Apply</button>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <label>Coupon</label>
+        <input id="coupon" placeholder="Enter coupon code"/>
+        <button class="btn" id="apply-coupon" style="margin-top:8px">Apply Coupon</button>
+      </div>
+
+      <div style="margin-top:12px">
+        <button class="btn" id="checkout-btn">Checkout</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <h4>Contact & Quick Actions</h4>
+      <div class="small"><strong>Phone:</strong> 7470607096</div>
+      <div class="small"><strong>Email:</strong> motherskitchen032008@gmail.com</div>
+      <div style="margin-top:8px">
+        <a class="btn" id="whatsapp-link" href="https://wa.me/917470607096?text=Hello%20Mother's%20Kitchen%20Bhilai%20-%20I%20want%20to%20order" target="_blank">Order via WhatsApp</a>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<!-- Checkout modal (simple) -->
+<div id="checkout" class="card hidden" style="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:92%;max-width:720px;z-index:9999">
+  <h3>Checkout</h3>
+  <form id="order-form" action="https://formsubmit.co/motherskitchen032008@gmail.com" method="POST" target="_blank">
+    <input type="hidden" name="_subject" value="New Order - Mother's Kitchen Bhilai">
+    <input type="hidden" name="_next" value="https://mayank5248657-byte.github.io/Mothers-kitchen/">
+    <div style="display:flex;gap:12px;flex-direction:column">
+      <label>Full name<input name="Customer Name" required></label>
+      <label>Phone<input name="Phone" required placeholder="10 digit mobile"></label>
+      <label>Delivery address<textarea name="Address" rows="2" required></textarea></label>
+      <label>Distance (km) <input id="order-distance" name="Distance (km)"></label>
+      <label>Items<textarea id="order-summary" name="Order Details" rows="4" required></textarea></label>
+      <label>Payment method
+        <select name="Payment method" id="order-payment">
+          <option>Cash on Delivery (COD)</option>
+          <option>UPI</option>
+          <option>Online (txn id)</option>
+        </select>
+      </label>
+      <label>Transaction ID (if paid) <input name="Transaction ID"></label>
+      <label>Any notes for delivery <input name="Delivery note"></label>
+      <!-- include totals -->
+      <input type="hidden" name="Items Total" id="form-items-total">
+      <input type="hidden" name="Packing" id="form-packing">
+      <input type="hidden" name="Delivery Charge" id="form-delivery">
+      <input type="hidden" name="Discount" id="form-discount">
+      <input type="hidden" name="Grand Total" id="form-grand">
+    </div>
+    <div style="display:flex;gap:8px;margin-top:10px;justify-content:flex-end">
+      <button type="button" class="btn ghost" id="cancel-checkout">Cancel</button>
+      <button type="submit" class="btn">Place Order</button>
+    </div>
+  </form>
+</div>
+
+<footer class="footer container">© 2025 Mother's Kitchen Bhilai — Packing 10% • Delivery ₹20 up to 6km then ₹10/km extra • Coupon: Motherskitchen</footer>
+
+<script>
+const MENU = [{"id": 1, "category": "All Day Indian Bites", "name": "Indore poha 500g", "price": 150}, {"id": 2, "category": "All Day Indian Bites", "name": "Special dry fruits poha 500g", "price": 180}, {"id": 3, "category": "All Day Indian Bites", "name": "Bread butter toast 4 slices", "price": 130}, {"id": 4, "category": "All Day Indian Bites", "name": "Aloo pyaaz sandwich", "price": 140}, {"id": 5, "category": "All Day Indian Bites", "name": "Chilli Garlic Maggi 500g", "price": 140}, {"id": 6, "category": "All Day Indian Bites", "name": "Chilli Garlic butter maggi 500g", "price": 160}, {"id": 7, "category": "All Day Indian Bites", "name": "Masala Maggi 500 g", "price": 125}, {"id": 8, "category": "All Day Indian Bites", "name": "Veg upma 500 g", "price": 200}, {"id": 9, "category": "All Day Indian Bites", "name": "Dahi Vada 1 peice", "price": 90}, {"id": 10, "category": "All Day Indian Bites", "name": "Dahi Vada 2 peice", "price": 180}, {"id": 11, "category": "All Day Indian Bites", "name": "Veg Dahi garden sandwich", "price": 150}, {"id": 12, "category": "All Day Indian Bites", "name": "Veg Dahi grilled sandwich", "price": 160}, {"id": 13, "category": "All Day Indian Bites", "name": "Veg mayonnaise sandwich", "price": 160}, {"id": 14, "category": "All Day Indian Bites", "name": "Veg paneer sandwich", "price": 170}, {"id": 15, "category": "All Day Indian Bites", "name": "Cholle Bhature (3 Bhature)", "price": 200}, {"id": 16, "category": "All Day Indian Bites", "name": "Pav bhaji (4 pav)", "price": 230}, {"id": 17, "category": "Thali", "name": "Veg Thali", "price": 280}, {"id": 18, "category": "Thali", "name": "Regular Thali", "price": 170}, {"id": 19, "category": "Thali", "name": "Special Thali", "price": 320}, {"id": 20, "category": "Meals", "name": "Chana masala 500g with rice 500g", "price": 270}, {"id": 21, "category": "Meals", "name": "Gatte ki sabzi 500g with rice 500g", "price": 270}, {"id": 22, "category": "Meals", "name": "Rajma masala 500g with rice 500g", "price": 270}, {"id": 23, "category": "Meals", "name": "Baigan ka bharta 250g with 5 poori", "price": 200}, {"id": 24, "category": "Meals", "name": "Chole masala 350g with 6 poori", "price": 240}, {"id": 25, "category": "Meals", "name": "Cholle masala 500g with rice 500g", "price": 270}, {"id": 26, "category": "Salad", "name": "Green salad", "price": 50}, {"id": 27, "category": "Main Course", "name": "Baigan ka bharta 250 g", "price": 160}, {"id": 28, "category": "Main Course", "name": "Aloo matar", "price": 200}, {"id": 29, "category": "Main Course", "name": "Mixed Veg", "price": 235}, {"id": 30, "category": "Main Course", "name": "Matar paneer 350g", "price": 250}, {"id": 31, "category": "Main Course", "name": "Chana masala 500g", "price": 200}, {"id": 32, "category": "Main Course", "name": "Cholle masala 500g", "price": 200}, {"id": 33, "category": "Main Course", "name": "Palak paneer 350g", "price": 260}, {"id": 34, "category": "Main Course", "name": "Dal fry", "price": 120}, {"id": 35, "category": "Main Course", "name": "Dal tadka", "price": 150}, {"id": 36, "category": "Breads", "name": "Aloo pyaaz paratha(1 peice) with raita/curd/chutney", "price": 100}, {"id": 37, "category": "Breads", "name": "Aloo pyaaz paratha(2 peice) with raita/curd/chutney", "price": 195}, {"id": 38, "category": "Breads", "name": "Aloo paratha(1 peice) with raita/curd/chutney", "price": 95}, {"id": 39, "category": "Breads", "name": "Aloo paratha(2 peice) with raita/curd/chutney", "price": 190}, {"id": 40, "category": "Breads", "name": "Plain paratha (1 peice)", "price": 40}, {"id": 41, "category": "Breads", "name": "Plain poori (1 peice)", "price": 20}, {"id": 42, "category": "Breads", "name": "Tawa roti (1 peice)", "price": 20}, {"id": 43, "category": "Breads", "name": "Phulka (1 peice)", "price": 20}, {"id": 44, "category": "Breads", "name": "Tawa roti with butter (1 peice)", "price": 30}, {"id": 45, "category": "Breads", "name": "Desi ghee plain paratha(1 peice)", "price": 70}, {"id": 46, "category": "Breads", "name": "Namkeen Puran Poli (1 peice)", "price": 100}, {"id": 47, "category": "Breads", "name": "Paneer paratha (1 peice)", "price": 130}, {"id": 48, "category": "Breads", "name": "Paneer paratha (2 peice)", "price": 250}, {"id": 49, "category": "Rice", "name": "Plain rice 500g", "price": 110}, {"id": 50, "category": "Rice", "name": "Jeera Rice 500g", "price": 120}, {"id": 51, "category": "Rice", "name": "Plain dal Khichdi 500g", "price": 210}, {"id": 52, "category": "Rice", "name": "Veg dal Khichdi 500g", "price": 230}, {"id": 53, "category": "Accompaniments", "name": "Boondi raita 250 ml", "price": 110}, {"id": 54, "category": "Accompaniments", "name": "Fried moong papad 1 peice", "price": 30}, {"id": 55, "category": "Accompaniments", "name": "Roasted moong papad 1 peice", "price": 25}, {"id": 56, "category": "Desserts", "name": "Kesariya halwa", "price": 130}, {"id": 57, "category": "Desserts", "name": "Plain halwa", "price": 120}, {"id": 58, "category": "Desserts", "name": "Kesariya bhaat", "price": 150}, {"id": 59, "category": "Desserts", "name": "Chawal ki kheer", "price": 100}, {"id": 60, "category": "Desserts", "name": "Sabudana kheer", "price": 100}, {"id": 61, "category": "Desserts", "name": "Gulab jamun 1 peice", "price": 50}, {"id": 62, "category": "Desserts", "name": "Rasgulla 1 peice", "price": 50}, {"id": 63, "category": "Desserts", "name": "Shrikhand 100g", "price": 50}];
+const SHOP = {lat: 21.196, lng: 81.353};
+const packingPercent = 0.10;
+const baseDelivery = 20; // up to 6 km
+const extraPerKm = 10;
+const freeDeliveryKm = 6;
+const couponCode = "Motherskitchen";
+
+let cart = {};
+
+// Render menu
+function renderMenu(){
+  const menuDiv = document.getElementById('menu');
+  menuDiv.innerHTML = '';
+  const categories = {};
+  MENU.forEach(item=>{ if(!categories[item.category]) categories[item.category]=[]; categories[item.category].push(item); });
+  for(const cat in categories){
+    const section = document.createElement('div');
+    section.innerHTML = `<h3 style="margin:6px 0">${cat}</h3>`;
+    const grid = document.createElement('div');
+    grid.style.display='grid'; grid.style.gridTemplateColumns='1fr'; grid.style.gap='8px';
+    categories[cat].forEach(item=>{ const el = document.createElement('div'); el.className='menu-item'; el.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-weight:700">${item.name}</div>
+            <div class="small">${item.desc||''}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:800">₹${item.price}</div>
+            <div class="qty-control" style="margin-top:8px">
+              <button class="btn ghost" data-id="${item.id}" data-act="dec">-</button>
+              <span id="q-${item.id}">0</span>
+              <button class="btn" data-id="${item.id}" data-act="inc">+</button>
+            </div>
+          </div>
+        </div>
+      `; grid.appendChild(el); });
+    section.appendChild(grid); menuDiv.appendChild(section);
+  }
+  document.querySelectorAll('[data-act]').forEach(btn=>{ btn.addEventListener('click', (e)=>{ const id = Number(btn.dataset.id); const act = btn.dataset.act; if(act==='inc') addToCart(id,1); else addToCart(id,-1); }); });
+}
+
+function addToCart(id, delta){ cart[id] = cart[id] || 0; cart[id] += delta; if(cart[id] <= 0) delete cart[id]; updateCartUI(); }
+
+function updateCartUI(){ MENU.forEach(item=>{ const q = cart[item.id] || 0; const span = document.getElementById('q-'+item.id); if(span) span.innerText = q; });
+  const container = document.getElementById('cart-items'); container.innerHTML = '';
+  let itemsTotal = 0;
+  Object.keys(cart).forEach(id=>{ const item = MENU.find(m=>m.id==id); const qty = cart[id]; const row = document.createElement('div'); row.style.display='flex'; row.style.justifyContent='space-between'; row.style.marginBottom='8px'; row.innerHTML = `<div>${item.name} x ${qty}</div><div>₹${item.price*qty}</div>`; container.appendChild(row); itemsTotal += item.price * qty; });
+  document.getElementById('items-total').innerText = itemsTotal;
+  const packing = Math.round(itemsTotal * packingPercent); document.getElementById('packing').innerText = packing;
+  let delivery = 0; const distStr = window._mk_distance_km || ''; const dist = distStr ? Number(distStr) : 0;
+  if(dist > 0){ delivery = baseDelivery; if(dist > freeDeliveryKm){ delivery += Math.ceil(dist - freeDeliveryKm) * extraPerKm; } }
+  document.getElementById('delivery-charge').innerText = delivery;
+  const couponApplied = window._mk_coupon_applied || false; const discount = couponApplied ? Math.round(itemsTotal * 0.20) : 0;
+  document.getElementById('discount').innerText = discount;
+  const grand = itemsTotal + packing + delivery - discount; document.getElementById('grand-total').innerText = grand;
+  document.getElementById('form-items-total').value = itemsTotal; document.getElementById('form-packing').value = packing; document.getElementById('form-delivery').value = delivery; document.getElementById('form-discount').value = discount; document.getElementById('form-grand').value = grand;
+}
+
+document.getElementById('apply-coupon').addEventListener('click', ()=>{ const code = document.getElementById('coupon').value.trim(); if(code.toLowerCase()===couponCode.toLowerCase()){ const itemsTotal = Number(document.getElementById('items-total').innerText) || 0; if(itemsTotal >= 150){ window._mk_coupon_applied = true; alert('Coupon applied: 20% off'); }else{ alert('Minimum ₹150 required for coupon'); window._mk_coupon_applied = false; } }else{ alert('Invalid coupon'); window._mk_coupon_applied = false; } updateCartUI(); });
+
+function toRad(x){return x*Math.PI/180;}
+function haversine(lat1,lon1,lat2,lon2){const R=6371;const dLat=toRad(lat2-lat1);const dLon=toRad(lon2-lon1);const a=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)*Math.sin(dLon/2);const c=2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));return R*c;}
+
+document.getElementById('use-location').addEventListener('click', ()=>{ if(!navigator.geolocation){ alert('Location not supported'); return; } navigator.geolocation.getCurrentPosition((pos)=>{ const lat = pos.coords.latitude; const lng = pos.coords.longitude; const d = haversine(lat,lng, 21.196, 81.353); window._mk_distance_km = Math.round(d*10)/10; alert('Distance from shop: ' + window._mk_distance_km + ' km'); updateCartUI(); document.getElementById('order-distance').value = window._mk_distance_km; }, (err)=>{ alert('Could not get location. You can enter distance manually.'); }, {maximumAge:60000,timeout:8000}); });
+
+document.getElementById('enter-manual').addEventListener('click', ()=>{ document.getElementById('manual-block').classList.toggle('hidden'); });
+document.getElementById('apply-manual').addEventListener('click', ()=>{ const v = Number(document.getElementById('manual-distance').value); if(!v || v<0){ alert('Enter valid km'); return; } window._mk_distance_km = v; document.getElementById('order-distance').value = v; updateCartUI(); alert('Distance set: ' + v + ' km'); });
+
+document.getElementById('checkout-btn').addEventListener('click', ()=>{ const items = Object.keys(cart); if(items.length===0){ alert('Cart is empty'); return; } let s = ''; items.forEach(id=>{ const item = MENU.find(m=>m.id==id); s += item.name + ' x ' + cart[id] + ' -> ₹' + (item.price*cart[id]) + '\n'; }); document.getElementById('order-summary').value = s; document.getElementById('order-distance').value = window._mk_distance_km || ''; document.getElementById('checkout').classList.remove('hidden'); updateCartUI(); });
+
+document.getElementById('cancel-checkout').addEventListener('click', ()=>{ document.getElementById('checkout').classList.add('hidden'); });
+
+renderMenu();
+updateCartUI();
+</script>
+</body>
+</html>

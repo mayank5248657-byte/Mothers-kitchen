@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+<rect width="100%" height="100%" fill="#fff8f0" rx="24"/>
+<g transform="translate(12,12)">
+  <ellipse cx="110" cy="80" rx="80" ry="36" fill="#fff5e6"/>
+  <path d="M20 60 a40 20 0 1 0 180 0 a40 20 0 1 0 -180 0" fill="#ffd59e"/>
+  <circle cx="80" cy="60" r="10" fill="#f28c28"/>
+  <text x="8" y="170" font-size="14" fill="#c62828" font-weight="700">Mother's Kitchen Bhilai</text>
+  <text x="8" y="190" font-size="11" fill="#333">Home Made With Love</text>
+</g>
+</svg>
